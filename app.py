@@ -1,4 +1,5 @@
 import uvicorn
+import joblib
 from fastapi import FastAPI
 from src.models.train_model import IrisModel, IrisSpecies
 
@@ -17,6 +18,11 @@ def predict_species(iris: IrisSpecies):
         'probability': probability
     }
 
+@app.get('/train')
+def train_species():
+    model.model = model._train_model()
+    joblib.dump(model.model, model.model_fname_)
+    return 'modelo entrenado'
 
 # 4. Run the API with uvicorn
 #    Will run on http://127.0.0.1:8000

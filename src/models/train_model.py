@@ -17,8 +17,9 @@ class IrisModel:
         try:
             self.model = joblib.load(self.model_fname_)
         except Exception as _:
-            self.model = self._train_model()
-            joblib.dump(self.model, self.model_fname_)
+            print('El modelo debe ser entrenado')
+            #self.model = self._train_model()
+            #joblib.dump(self.model, self.model_fname_)
         
     def _train_model(self):
         X = self.df.drop('species', axis=1)
